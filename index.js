@@ -2,6 +2,24 @@ const request = require('request');
 //request.debug = true;
 const gbk = require('gbk');
 
+const koa = require('koa');
+
+var app = koa();
+
+app.use('/', function () {
+  this.body = '/';
+});
+
+app.use('/search', function () {
+  this.body = 'search';
+});
+
+app.use('/play', function () {
+  this.body = 'play';
+});
+
+app.listen(3000);
+
 //搜索建议
 //http://vs.sugg.sogou.com/sugg/ajaj_json.jsp?key=%E4%BA%BA%E9%97%B4zhiwei&type=vc&ori=yes&pr=vc&abtestid=&ipn=&vzd=1
 //window.sogou.sug(["无心法师",["无心法师2|serial","无心法师第一季|serial","无心法师216|serial","无心法师215|serial","无心法师 第二季|serial","无心法师ⅱ|serial"]],-1);
@@ -40,10 +58,10 @@ var options = {
   'timeout': 1500
 }
 
-var query = encodeURIComponent('火影忍者');
+var query = encodeURIComponent('无心法师2');
 var req = Object.assign(options, { url: `http://vs.sugg.sogou.com/sugg/ajaj_json.jsp?key=${query}&type=vc&ori=yes&pr=vc&abtestid=&ipn=&vzd=1` });
 
-search();
+//search();
 async function search() {
   request(req, async function (error, response, body) {
     if (error) {
