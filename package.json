@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "gbk": "^0.1.0",
+    "koa": "^2.3.0",
     "request": "^2.81.0"
   },
   "devDependencies": {},

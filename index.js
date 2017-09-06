@@ -4,8 +4,8 @@ const gbk = require('gbk');
 
 const koa = require('koa');
 
-var app = koa();
-
+var app = new koa();
+/**
 app.use('/', function () {
   this.body = '/';
 });
@@ -17,8 +17,8 @@ app.use('/search', function () {
 app.use('/play', function () {
   this.body = 'play';
 });
-
-app.listen(3000);
+**/
+//app.listen(3000);
 
 //搜索建议
 //http://vs.sugg.sogou.com/sugg/ajaj_json.jsp?key=%E4%BA%BA%E9%97%B4zhiwei&type=vc&ori=yes&pr=vc&abtestid=&ipn=&vzd=1
@@ -61,7 +61,7 @@ var options = {
 var query = encodeURIComponent('无心法师2');
 var req = Object.assign(options, { url: `http://vs.sugg.sogou.com/sugg/ajaj_json.jsp?key=${query}&type=vc&ori=yes&pr=vc&abtestid=&ipn=&vzd=1` });
 
-//search();
+search();
 async function search() {
   request(req, async function (error, response, body) {
     if (error) {
@@ -173,7 +173,8 @@ async function fecth2(query, key, site, range) {
             let result = reg.exec(html);
             if (result != null && result[1]) {
               result = result[1];
-              console.log('站点:' + site + ',集数:' + j + ',地址:' + result);
+              let url = result.indexOf('?') > 0 ? result.substr(0, result.indexOf('?')) : result;
+              console.log('站点:' + site + ',集数:' + j + ',地址:' + url);
             }
           }
           resolve();
@@ -201,7 +202,8 @@ async function fecth3(j, site, url) {
         let result = reg.exec(html);
         if (result != null && result[1]) {
           result = result[1];
-          console.log('站点:' + site + ',集数:' + j + ',地址:' + result);
+          let url = result.indexOf('?') > 0 ? result.substr(0, result.indexOf('?')) : result;
+          console.log('站点:' + site + ',集数:' + j + ',地址:' + url);
         }
       }
       resolve();
@@ -226,7 +228,8 @@ async function fecth4(query, key, site, dates) {
             let result = reg.exec(html);
             if (result != null && result[1]) {
               result = result[1];
-              console.log('站点:' + site + ',集数:' + dates[j]['date'] + ',地址:' + result);
+              let url = result.indexOf('?') > 0 ? result.substr(0, result.indexOf('?')) : result;
+              console.log('站点:' + site + ',集数:' + dates[j]['date'] + ',地址:' + url);
             }
           }
           resolve();

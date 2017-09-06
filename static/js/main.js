@@ -113,7 +113,8 @@ $(function () {
             error: function (err) {
                 //$('#mc-notification').hide().html('<span class="alert">服务器繁忙,请稍候重试.</span>').fadeIn("slow");
                 //$('#mc-notification').hide().html('<span class="alert"><i class="fa fa-exclamation-triangle"></i>你好</span>').fadeIn("slow");
-                $('#mc-notification').hide().html('<span class="success"><i class="fa fa-envelope"></i><a href="http://www.baidu.com">无心法师2</a></span><br><span class="success"><i class="fa fa-envelope"></i><a href="http://www.baidu.com">无心法师2</a></span>').fadeIn("slow");
+                $('#mc-notification').hide().html('<span class="success"><i class="fa fa-envelope"></i><a class="search-item" href="http://www.baidu.com">无心法师2</a></span><br>'+
+                '<span class="success"><i class="fa fa-envelope"></i><a class="search-item" href="https://www.gaiasys.cn">无心法师2</a></span>').fadeIn("slow");
             },
             success: function (data) {
 
@@ -130,6 +131,18 @@ $(function () {
         });
     }
 
+    $(document).on('click', '.search-item', function (e) {
+        if (e) {
+            e.preventDefault();
+        }
+        $('#player_div').removeClass('hide');
+        $('#player_iframe').attr('src', $(this).attr('href'));
+        mScroll('player_div');
+    });
+
+
+
+    function mScroll(id) { $("html,body").stop(true); $("html,body").animate({ scrollTop: $("#" + id).offset().top }, 500); }
 
     /* ==========================================================================
      Textrotator
